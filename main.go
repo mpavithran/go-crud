@@ -6,6 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/mpavithran/go-crud/config"
 	"github.com/mpavithran/go-crud/controllers"
+
+	"github.com/mpavithran/go-crud/models"
 	"github.com/mpavithran/go-crud/repositories"
 	"github.com/mpavithran/go-crud/routes"
 	"github.com/mpavithran/go-crud/services"
@@ -13,6 +15,7 @@ import (
 
 func main() {
 	config.ConnectDB()
+	config.DB.AutoMigrate(&models.User{})
 
 	userRepo := repositories.NewUserRepository(config.DB)
 	userService := services.NewUserService(userRepo)
